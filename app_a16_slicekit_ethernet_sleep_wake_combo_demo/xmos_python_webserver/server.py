@@ -36,7 +36,7 @@ except:
    exit(1)
 
 # Global variables
-g_kb_interrupt = False
+g_interrupted = False
 g_start_counter = False
 g_sleep_time = 30
 g_temperature = 0
@@ -45,8 +45,8 @@ g_log_file = 'temperature.log'
 
 # Keyboard interrupt handler
 def kb_handler(signum, frame):
-    global g_kb_interrupt
-    g_kb_interrupt = True
+    global g_interrupted
+    g_interrupted = True
 
 signal.signal(signal.SIGINT, kb_handler)
 
@@ -87,7 +87,7 @@ def counter():
         log.write(time.strftime('%H:%M:%S') + ' ' + str(g_temperature) + '\n')
         log.flush()
 
-    if g_kb_interrupt:
+    if g_interrupted:
       log.close()
       break
 
@@ -126,6 +126,7 @@ class xmos_tcp_handler(socketserver.BaseRequestHandler):
 # start_server - wait until the link is up and then start listening
 # ----------------------------------------------------------------------------
 def start_server():
+  global g_interrupted
 
   PORT = 80
 
@@ -142,13 +143,17 @@ def start_server():
       server.serve_forever()
 
     except KeyboardInterrupt:
-      global g_kb_interrupt
-      g_kb_interrupt = True
+      g_interrupted = True
       server.socket.close()
       print('Server: Exiting')
       break
 
-    except:
+    except Exception, e:
+      if 'Permission denied' in str(e):
+        print('Server: Permssion denied - please run as administrator')
+        g_interrupted = True
+        break
+
       # Wait and try again
       time.sleep(1)
 
@@ -165,7 +170,7 @@ if __name__ == "__main__":
   t_counter.start()
 
   while True:
-    if g_kb_interrupt:
+    if g_interrupted:
       t_counter.join()
       print('Server: Terminating...')
       break
