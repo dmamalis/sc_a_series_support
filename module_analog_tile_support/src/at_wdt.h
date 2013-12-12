@@ -26,7 +26,7 @@ void at_watchdog_disable(void);
  */
 void at_watchdog_set_timeout(unsigned short milliseconds);
 
-/** Function that kicks the watchdog timer, Ie. sets it counting from zero.
+/** Function that kicks the watchdog timer, i.e. sets it counting from zero.
  * This function should be periodically called to prevent overflow and system reset, during
  * normal operation.
  * It returns the current time in the watchdog timer, to allow the application to see

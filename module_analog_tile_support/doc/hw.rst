@@ -1,14 +1,22 @@
-
-Evaluation Platforms
+Evaluation platforms
 ====================
 
 .. _sec_hardware_platforms:
 
-Recommended Hardware
+Recommended hardware
 --------------------
 
-This module may be evaluated using the sliceKIT modular development platform, available from Digikey. Required board SKUs are:
+This module may be evaluated using the sliceKIT modular development platform, available from Digikey. Required units are:
 
-* XP-SKC-A16 (xCORE-Analog sliceKIT core board), XA-SK-MIXED_SIGNAL (analog support sliceCARD), XA-SK-E100 (Ethernet PHY sliceCARD) and XA-SK-XTAG2 (sliceKIT XTAG adaptor) for Low-Power Ethernet client demo
+For low-power Ethernet client demo:
+   
+   * xCORE-Analog sliceKIT core board (XP-SKC-A16)
+   * Mixed signal sliceCARD (XA-SK-MIXED_SIGNAL)
+   * Ethernet sliceCARD (XA-SK-E100)
+   * sliceKIT XTAG adaptor (XA-SK-XTAG2)
 
-* XP-SKC-A16 (xCORE-Analog sliceKIT core board), XA-SK-MIXED_SIGNAL (analog support sliceCARD) and XA-SK-XTAG2 (sliceKIT XTAG adaptor) for ADC to PWM Demo
+For ADC to PWM demo:
+   
+   * xCORE-Analog sliceKIT core board (XP-SKC-A16)
+   * Mixed signal sliceCARD (XA-SK-MIXED_SIGNAL)
+   * sliceKIT XTAG adaptor (XA-SK-XTAG2)

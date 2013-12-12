@@ -9,7 +9,7 @@ xCORE-Analog sliceKIT Ethernet sleep wake combo demo
 Demo overview
 -------------
 
-This is a simple demo using the Sleep and Wake feature of A series XMOS devices. In this demo, a web client running on the XMOS device informs a web server running on a host workstation when it is going to sleep and has woken up from sleep. The XMOS device can be woken up using: timer, pin value, etc...
+This is a simple demo using the Sleep and Wake feature of xCORE-Analog devices. In this demo, a web client running on the xCORE-Analog device informs a web server running on a host workstation when it is going to sleep and has woken up from sleep. The xCORE-Analog device can be woken up using: timer, pin value, etc...
 
 Software requirements
 ---------------------

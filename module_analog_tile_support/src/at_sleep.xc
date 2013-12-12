@@ -22,8 +22,8 @@ static unsigned int convert_ticks_to_ms (unsigned long long ticks){
 }
 
 
-//128B deep sleep memory access. These functions exepct char type. See at_sleep.h for macros
-//that provide the type independant access to these (Ie. use struct, int, etc..)
+//128B deep sleep memory access. These functions expect char type. See at_sleep.h for macros
+//that provide the type independent access to these (i.e. use struct, int, etc..)
 void at_pm_memory_read_impl(unsigned char data[], unsigned char size){
   assert(size <= XS1_SU_NUM_GLX_PER_MEMORY_BYTE && msg("Read from sleep memory exceeds size"));
   read_periph_8 (analog_tile, XS1_SU_PER_MEMORY_CHANEND_NUM, XS1_SU_PER_MEMORY_BYTE_0_NUM,
@@ -125,9 +125,9 @@ void at_pm_sleep_now(void){
       crystal_si_osc_close = 1;
 
   if (crystal_si_osc_close){
-    //Setup and enable 20MHz on chip oscilator
+    //Setup and enable 20MHz on chip oscillator
     write_val = XS1_SU_GEN_OSC_SEL_SET(0, 1);              //Ensure Si OSC is enabled
-    write_val = XS1_SU_GEN_OSC_RST_EN_SET(write_val, 0);   //Select 20MHz osc
+    write_val = XS1_SU_GEN_OSC_RST_EN_SET(write_val, 0);   //Select 20MHz oscillator
     write_periph_8(analog_tile, XS1_SU_PER_OSC_CHANEND_NUM, XS1_SU_PER_OSC_ON_SI_CTRL_NUM, 1, &write_val);
 
     //wait until oscillator is stable
@@ -137,7 +137,7 @@ void at_pm_sleep_now(void){
       read_periph_32(analog_tile, XS1_SU_PER_PWR_CHANEND_NUM, XS1_SU_PER_PWR_PMU_DBG_NUM, 1, &read_val_32);
       osc_good = XS1_SU_PWR_ON_SI_STBL(read_val_32);
       t :> timenow;
-      assert(timenow < timeout && msg("Si oscillator failed to settle within stablisation time"));
+      assert(timenow < timeout && msg("Si oscillator failed to settle within stabilisation time"));
     }
   }
 
@@ -152,13 +152,13 @@ void at_pm_sleep_now(void){
   write_periph_32(analog_tile, XS1_SU_PER_PWR_CHANEND_NUM, XS1_SU_PER_PWR_STATE_ASLEEP_NUM, 1, &write_val_32);
 
   if (crystal_si_osc_close){
-    //Switch to silicon oscilator
+    //Switch to silicon oscillator
     write_val = XS1_SU_GEN_OSC_RST_EN_SET(0, 0);           //Disable reset on clock change
-    write_val = XS1_SU_GEN_OSC_SEL_SET(write_val, 1);      //Switch to silicon oscialtor
+    write_val = XS1_SU_GEN_OSC_SEL_SET(write_val, 1);      //Switch to silicon oscillator
     write_periph_8(analog_tile, XS1_SU_PER_OSC_CHANEND_NUM, XS1_SU_PER_OSC_GEN_CTRL_NUM, 1, &write_val);
 
     //Disable XTAL bias and oscillator
-    write_val = XS1_SU_XTAL_OSC_EN_SET(0, 0);              //Switch off crysal oscillator
+    write_val = XS1_SU_XTAL_OSC_EN_SET(0, 0);              //Switch off crystal oscillator
     write_val = XS1_SU_XTAL_OSC_BIAS_EN_SET(write_val, 0); //Disable crystal bias circuit
     write_periph_8(analog_tile, XS1_SU_PER_OSC_CHANEND_NUM, XS1_SU_PER_OSC_XTAL_CTRL_NUM, 1, &write_val);
   }

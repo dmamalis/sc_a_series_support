@@ -1,4 +1,3 @@
-
 Example applications
 ====================
 
@@ -7,18 +6,18 @@ ADC to PWM demo
 
 This simple application shows how the ADC can be used in conjunction with a PWM generator (with filtered output) to create an analog loopback. An analog joystick provides a reference for an ADC input. The read value is then used to generate a PWM value, the filter output from which is read by a second ADC channel. Both values are displayed to observe if they track.
 
-   * Package: sc_periph
+   * Package: sc_a_series_support
    * Application: app_pwm_demo_a
 
 Low-Power Ethernet client demo
 ------------------------------
 
-This demo uses the sleep and wake feature of A series XMOS devices. In this demo, a webclient running on the XMOS device informs a webserver running on a host workstation when it is going to sleep and has woken up from sleep. The XMOS device can be woken up using a periodic timer or pin connected to a comparator output from an LDR (light dependent resistor).
+This demo uses the sleep and wake feature of xCORE-Analog devices. In this demo, a webclient running on the xCORE-Analog device informs a webserver running on a host workstation when it is going to sleep and has woken up from sleep. The xCORE-Analog device can be woken up using a periodic timer or pin connected to a comparator output from an LDR (light dependent resistor).
 
-   * Package: sc_periph
+   * Package: sc_a_series_support
    * Application: app_a16_slicekit_ethernet_sleep_wake_combo_demo
 
-   ++Note to demonstrate entry AND exit from sleep mode, it is necessary to flash the application rather than just load it into RAM. This is because sleep mode removes the power from the xCORE and exit from sleep mode is a reset. Therefore to continue executing, the chip needs to boot from flash again.
+   *Note:* To demonstrate entry AND exit from sleep mode, it is necessary to flash the application rather than just load it into RAM. This is because sleep mode removes the power from the xCORE-Analog device and exit from sleep mode is a reset. Therefore to continue executing, the chip needs to boot from flash again.
 
 Test applications
 -----------------
