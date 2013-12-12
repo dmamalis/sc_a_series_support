@@ -148,7 +148,7 @@ def start_server():
       print('Server: Exiting')
       break
 
-    except Exception, e:
+    except Exception as e:
       if 'Permission denied' in str(e):
         print('Server: Permssion denied - please run as administrator')
         g_interrupted = True
