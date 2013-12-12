@@ -4,7 +4,7 @@
 #include <xs1_su.h>
 #include <platform.h>
 
-//Macro to allow arbitrary struct/array to be passed to sleep mem functions
+//Macro to allow arbitrary struct/array to be passed to sleep memory functions
 //Uses XC cast (x, y) operation. See the _impl functions below also.
 /**
  * Reads sleep memory and copies to array/structure up to 128B
@@ -22,22 +22,22 @@
 
 
 /**
- * Approximate speed of 31KHz on chip silicon oscilator in Hz
+ * Approximate speed of 31KHz on chip silicon oscillator in Hz
  */
 #define SI_OSCILLATOR_FREQ_31K 31250
 
 /**
- * Approximate speed of 20MHz on chip silicon oscilator in MHz
+ * Approximate speed of 20MHz on chip silicon oscillator in MHz
  */
 #define SI_OSCILLATOR_FREQ_20M 20
 
 /**
- * Max stabilisation time of 20MHz oscillator in milliseconds Approximate speed of 31KHz on chip silicon oscilator in Hz
+ * Maximum stabilisation time of 20MHz oscillator in milliseconds Approximate speed of 31KHz on chip silicon oscillator in Hz
  */
 #define SI_OSC_STABILISATION   15
 
 /**
- * Maximum percetage change of VCO. Used in sleep mode to see if XTAL and 20MHz OSC are close enough
+ * Maximum percentage change of VCO. Used in sleep mode to see if XTAL and 20MHz OSC are close enough
  * to allow switch between clock sources without reset. If close enough, XTAL can be switched off.
  */
 #define VCO_STEP_MAX           30
@@ -46,13 +46,14 @@
  *
  * Each source type can be enabled or disabled.
  * RTC and WAKE_PIN_x may be used together however,
- * WAKE_PIN_LOW or HIGH are mutually exclusive. Ie. enabling wake
+ * WAKE_PIN_LOW or HIGH are mutually exclusive, i.e. enabling wake
  * on WAKE_PIN_LOW will disable WAKE_PIN_HIGH
  */
 typedef enum  {
     RTC,            /**<Enable wake from RTC*/
     WAKE_PIN_LOW,   /**<Wake when wake pin is low*/
-    WAKE_PIN_HIGH}  /**<Wake when wake pin is high*/
+    WAKE_PIN_HIGH   /**<Wake when wake pin is high*/
+}
 at_wake_sources_t;
 
 
@@ -62,7 +63,7 @@ at_wake_sources_t;
  * which is a macro that first casts the passed variable to char before
  * calling this function.
  *
- * \param data      reference to the charater array to be written
+ * \param data      reference to the character array to be written
  *
  * \param size      size of array to be written in bytes
  */
@@ -74,13 +75,13 @@ void at_pm_memory_read_impl(char data[], unsigned char size);
  * which is a macro that first casts the passed variable to char before
  * calling this function.
  *
- * \param data      reference to the charater array to be written
+ * \param data      reference to the character array to be written
  *
  * \param size      size of array to be written in bytes
  */
 void at_pm_memory_write_impl(char data[], unsigned char size);
 
-/** Function that test to see if the deep sleep memory contents are valid.
+/** Function that tests to see if the deep sleep memory contents are valid.
  *  Use before reading sleep memory to see if it has been previously initialised.
  *  Note that the chip initialises this to zero on reset.
  *
@@ -104,7 +105,7 @@ void at_pm_memory_invalidate(void);
 /** Function that enables the chip to be woken by specific sources
  * Each wake source type can be enabled or disabled.
  * RTC and WAKE_PIN_x may be used together however,
- * WAKE_PIN_LOW or HIGH are mutually exclusive. Ie. enabling wake
+ * WAKE_PIN_LOW or HIGH are mutually exclusive i.e. enabling wake
  * on WAKE_PIN_LOW will disable WAKE_PIN_HIGH and vice versa.
  * A single wake source can only be passed at a time. To enable multiple sources,
  * please call the function multiple times for each wake source.
@@ -116,7 +117,7 @@ void at_pm_enable_wake_source(at_wake_sources_t wake_source);
 /** Function that disables the chip to be woken by specific sources
  * Each wake source type can be enabled or disabled.
  * Disabling either WAKE_PIN_LOW or WAKE_PIN_HIGH will have the same
- * effect of diabling wake from pin.
+ * effect of disabling wake from pin.
  * A single wake source can only be passed at a time. To enable multiple sources,
  * please call the function multiple times for each wake source.
  *
@@ -157,7 +158,7 @@ void at_pm_set_min_sleep_time(unsigned int min_sleep_time);
  */
 void at_pm_sleep_now(void);
 
-/** Function that reads the rtc value.
+/** Function that reads the RTC value.
  * Takes the counter and scales to milliseconds.
  * The time may be up to about 4E6 seconds from reset, or approx 48 days
  * before overflow occurs.
@@ -166,7 +167,7 @@ void at_pm_sleep_now(void);
  */
 unsigned int at_rtc_read(void);
 
-/** Function that clears the rtc value.
+/** Function that clears the RTC value.
  * Sets the time to zero.
  */
 void at_rtc_reset(void);

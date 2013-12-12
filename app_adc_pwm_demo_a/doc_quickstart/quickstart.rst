@@ -1,9 +1,9 @@
-xCORE-Analog ADC PWM loopback demo quick start guide
-====================================================
+xCORE-Analog ADC PWM loopback demo quickstart guide
+===================================================
 
 .. _app_adc_pwm_demo_a_quick_start:
 
-This application demonstrates how to use the ADC on xCORE-Analog (A-Series) sliceKIT core board.
+This application demonstrates how to use the ADC on xCORE-Analog sliceKIT core board.
 
 The application reads one channel of the ADC connected to one axis of the analog joystick and uses this value to drive a PWM signal on a 1b port. The filtered PWM is then read by a second ADC channel, and both results are printed to the console whenever the second ADC value changes.
 
@@ -17,10 +17,10 @@ Hardware setup
 
 Required hardware:
 
-* XP-SKC-A16: xCORE-Analog sliceKIT core board
-* XA-SK-MIXED SIGNAL: mixed signal sliceCARD
-* XTAG-2: XTAG2
-* XA-SK-XTAG2: adapter
+* xCORE-Analog sliceKIT core board (XP-SKC-A16)
+* Mixed signal sliceCARD (XA-SK-MIXED SIGNAL)
+* XTAG2 (XTAG-2)
+* XTAG2 adapter (XA-SK-XTAG2)
 * USB cable
 * 12V DC power supply
 
@@ -59,20 +59,25 @@ Run the application
 Now that the application has been compiled, the next step is to run it on the xCORE-Analog sliceKIT core board using the tools to load the application over JTAG (via the XTAG2 and XTAG Adapter card) into the xCORE multicore microcontroller.
 
 #. Select the file ``main.xc`` in the ``app_adc_pwm_demo_a`` project from the Project Explorer. This resides in the /src directory.
-#. From the ``Run`` pull down menu, select ``Run Configurations``. In the left hand pane of the run configurations dialogue, you will see the ``xCORE Application``. Double click (or right click-new) ``xCORE Application``. You will see the ``Main`` tab of the right hand pane containing target options. Ensure that ``hardware`` is selected from the ``Device options`` box. If you only see ``Simulator`` as the available target then please check to ensure the XTAG-2 debug adapter is properly connected to your host workstation. Next choose ``Run xSCOPE output server`` from the I/O options selection near the bottom. This will enable collection of debug print lines from the application, using low-intrusiveness printing via xSCOPE.
+#. From the ``Run`` pull down menu, select ``Run Configurations``. In the left hand pane of the run configurations dialogue, you will see the ``xCORE Application``. Double click (or right click-new) ``xCORE Application``. You will see the ``Main`` tab of the right hand pane containing target options. Ensure that ``hardware`` is selected from the ``Device options`` box. If you only see ``Simulator`` as the available target then please check to ensure the XTAG-2 debug adapter is properly connected to your host workstation. Next choose ``xSCOPE (via xCONNECT/UART)`` from the Target I/O options selection near the bottom. This will enable collection of debug print lines from the application, using low-intrusiveness printing via xSCOPE.
 #. Now run the application by clicking on the ``Run`` button at the bottom right. When the application is running, click on the ``Console`` tab at the bottom of xTIMEcomposer to view print output.
 #. You should see the text ``Analog loopback demo started.`` in the console window followed by ``ADC joystick : <value>  ADC header : <value>`` showing the read values from the joystick and header ADC inputs.
+
+Note that, whilst the values track each other, they will not be exactly the same. The reason for this is the inherent inaccuracy of the analog-digital and digital-analog conversion steps. In this example, the integrated ADC is the more accurate of the two mixed signal stages (see section 18.4 of the user manual for specification), although may still exhibit up to 10LSB of gain error (around 3 bits) at full scale. We are taking 8b samples from the ADC so overall accuracy will be close to 8bits.
+
+The DAC in this example is a simple PWM signal with a passive, second-order RC filter. The period of the PWM is 200us, which compared with the time step of 10ns, provides a natural resolution of just under 8bits. However, the reference voltage for the PWM-DAC is VDDIO and there will be some ripple from the output filter, which will further decrease accuracy. Consequently, a total system accuracy for the loopback demo of approximately 6-7 bits should be expected, which it does acheive. 
 
 Enable Real-Time xSCOPE
 -----------------------
 
 The xTIMEcomposer Studio includes xSCOPE, a tool for instrumenting your program with real-time probes. This tool allows you to collect data and display it graphically within xTIMEcomposer. As well as a graphical output, the xSCOPE mechanism provides very low intrusiveness console printing.
 
+#. Stop the running program by clicking on Terminate (indicated by a Red square in the *Console* window).
 #. Enable real-time xSCOPE. From the ``Run`` pull down menu, select ``Run Configurations``. In the left hand pane of the run configurations dialogue, you will see the ``xCORE Application -> app_adc_pwm_demo_a.xe`` tree, which was created from the previous run. Select  ``app_adc_pwm_demo_a.xe``, and in the ``xSCOPE`` tab, select ``Real-Time [XRTScope] Mode``. This will instruct the tool to render received xSCOPE data in real time. Click ``Apply`` followed by ``Run``.
 #. Open the xSCOPE window. When the program is running, click on the ``Real-time Scope`` window at the bottom and drag it away from the xTIMEcomposer window. This allows a separate xSCOPE window to be viewed at the same time as console printing. Re-size the xSCOPE window so that all of the buttons and both signal source bars can be seen in the left hand pane.
-#. Configure the xSCOPE vertical axes. Because the signals being viewed are not periodic, auto setting is not effective. Consequently, you will need to set the gain, offset and time-base. Using your left and right mouse buttons, right-click first on ``Offset:`` in the Joystick ADC2 trace to set it to ``-500``. Next right-click on ``Samples/Div:`` for both the Joystick ADC2 and Header ADC4 traces and set them to ``200``. Try moving the joystick - you will see both traces track up and down together.
+#. Configure the xSCOPE vertical axes. Because the signals being viewed are not periodic, auto setting is not effective. Consequently, you will need to set the gain, offset and time-base. Using your left and right mouse buttons, right-click first on ``Offset:`` in the Joystick ADC2 trace to set it to around ``-425``. Next right-click on ``Samples/Div:`` for both the Joystick ADC2 and Header ADC4 traces and set them to ``425``. Try moving the joystick - you will see both traces track up and down together.
 #. Configure the xSCOPE horizontal axis. Left-click on the ``Window:`` text at the bottom left, until it reads ``Window: 1.00s``. This slows down the horizontal axis to one second per screen. Try waggling the joystick quickly. You should see two traces oscillating, clearly showing the centering effect of the spring inside the joystick.
-#. Configure the xSCOPE trigger. Left-click on the square to the left of the signal ``Joystick ADC``. Next click on the number just to the right of the button that says ``Falling``. Set this to 100. The scope is now set to trigger as the Joystick ADC passes through the value 100 on the rising edge. Finally set the vertical axis to 100ms (or 10ms per division) and try holding the joystick right over, then let it ping back to centre. You should see traces - the sampled joystick value and the generated PWM/DAC value which lags due to the timed delay within the software loop, which is about 1ms. You may also see a slight overshoot, which shows that the joystick oscillates slightly when pinging back to centre.
+#. Configure the xSCOPE trigger. Left-click on the square to the left of the signal ``Joystick ADC``. Next click on the number just to the right of the button that says ``Falling``. Set this to around 100 (Ie. just below half scale). The scope is now set to trigger as the Joystick ADC passes through the centre on the falling edge. Finally set the vertical axis to 100ms (or 10ms per division) and try holding the joystick right over, then let it ping back to centre. You should see traces - the sampled joystick value and the generated PWM/DAC value which lags due to the timed delay within the software loop, which is about 1ms. You may also see a slight overshoot, which shows that the joystick physically oscillates slightly when pinging back to centre.
 
 .. figure:: images/xscope.*
 

@@ -67,9 +67,9 @@ void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
   at_pm_enable_wake_source(RTC);
   // Delay for some time to start web server on the host computer
   if(fresh_start) delay_seconds(10);
-  // Set webserver paramters
+  // Set webserver parameters
   webclient_set_server_config(server_config);
-  // Init web client
+  // Initialize web client
   webclient_init(c_xtcp);
   // Connect to webserver
   webclient_connect_to_server(c_xtcp);
@@ -112,7 +112,8 @@ void ethernet_sleep_wake_handler(chanend c_sensor, chanend c_xtcp)
         ws_data_wake[9] = btn_press_count/100 + '0';
         ws_data_wake[10] = (btn_press_count%100)/10 + '0';
         ws_data_wake[11] = btn_press_count%10 + '0';
-        ws_data_wake[28] = sensor_data.temperature/100 + '0';
+        if(sensor_data.temperature < 0) ws_data_wake[28] = '-';
+        else ws_data_wake[28] = sensor_data.temperature/100 + '0';
         ws_data_wake[29] = (sensor_data.temperature%100)/10 + '0';
         ws_data_wake[30] = sensor_data.temperature%10 + '0';
         ws_data_wake[46] = sensor_data.joystick_x/100 + '0';

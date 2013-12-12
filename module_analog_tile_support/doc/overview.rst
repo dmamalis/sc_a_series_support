@@ -1,10 +1,10 @@
 Overview
 ========
 
-Analog tile library
--------------------
+xCORE-Analog support library
+----------------------------
 
-The XMOS A-Series XS1 devices include an analog tile with various peripherals including ADC, RTC, WDT and sleep mode controller. This library provides an XC language API to control these features without the need for detailed knowledge of the operation of these functions.
+The xCORE-Analog devices include an analog tile with various peripherals including ADC, RTC, WDT and sleep mode controller. This library provides an API to control these features without the need for detailed knowledge of the operation of these functions.
 
 
 ADC library features
@@ -30,10 +30,10 @@ Sleep library features
 - RTC (Real Time Clock) configuration and control. Converts time and wake times to milliseconds.
 - Deep sleep memory (128Byte) access and validation for state storage during sleep
 
-Maximum resource requirements for Analog support library
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Resource requirements for xCORE-Analog support library
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Using the entire API, the following resource requirements should be expected.
+Using the entire API, the following resource requirements is expected.
 
 +------------------+----------------------------------------+
 | Resource         | Usage                                  |

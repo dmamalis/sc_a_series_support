@@ -1,8 +1,3 @@
-// Copyright (c) 2013, XMOS Ltd., All rights reserved
-// This software is freely distributable under a derivative of the
-// University of Illinois/NCSA Open Source License posted in
-// LICENSE.txt and at <http://github.xcore.com/>
-//
 #ifndef __adc__h__
 #define __adc__h__
 
@@ -17,7 +12,7 @@
 #define XS1_MAX_NUM_ADC 8
 
 /**
- * Minimum guarranteed buffer depth. Exceeding this number may cause lockup on read_packet.
+ * Minimum guaranteed buffer depth. Exceeding this number may cause lock-up on read_packet.
  * Use multiple read commands for more than 5 enabled ADC channels
  */
 #define XS1_MAX_SAMPLES_PER_PACKET 5
@@ -45,11 +40,10 @@ typedef enum at_adc_bits_per_sample_t {
  * Configuration structure for ADCs:
  */
 typedef struct {
-    char                   input_enable[XS1_MAX_NUM_ADC];   /**<An array ints to determine which inputs are active.                                                                                    Each non-zero input will be enabled.*/
-    at_adc_bits_per_sample_t  bits_per_sample;              /**<Select how many bits to sample per ADC.*/
-    unsigned int           samples_per_packet;              /**< Number of samples per packet. Must be >0 and <=XS1_MAX_SAMPLES_PER_PACKET.*/
-    int                    calibration_mode;                /**<When set the ADCs will sample a 0.8V reference
-                                                            rather than the external voltage.*/
+    char                      input_enable[XS1_MAX_NUM_ADC]; /**<An array to determine which inputs are active. Each non-zero input will be enabled.*/
+    at_adc_bits_per_sample_t  bits_per_sample;               /**<Select how many bits to sample per ADC.*/
+    unsigned int              samples_per_packet;            /**<Number of samples per packet. Must be >0 and <=XS1_MAX_SAMPLES_PER_PACKET.*/
+    int                       calibration_mode;              /**<When set the ADCs will sample a 0.8V reference rather than the external voltage.*/
 } at_adc_config_t;
 
 #ifndef __XC__
@@ -93,7 +87,7 @@ void at_adc_trigger(out port trigger_port);
  * Trigger the ADC enough times to complete a packet.
  *
  * \param trigger_port The port connected to the ADC trigger pin.
- * \param config       The ADC ocnfiguration.
+ * \param config       The ADC configuration.
  */
 void at_adc_trigger_packet(out port trigger_port, const_adc_config_ref_t config);
 

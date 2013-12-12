@@ -5,7 +5,7 @@ xCORE-Analog Support Library
 :Maintainer: pthedinger
 :Description: Collection of functions to support xCORE-Analog peripherals.
 
-The xCORE-Analog (A-Series) Support Library provides a set of functions and 
+The xCORE-Analog support library provides a set of functions and 
 datatypes which aid the use of the peripherals.
 
 Key Features
@@ -13,8 +13,8 @@ Key Features
 
 module_analog_tile_support:
  
-* Support for the A-Series Analog to Digital Converters (ADCs)
-* Support for A-Series Watchdog Timer (WDT)
+* Support for the Analog to Digital Converters (ADCs)
+* Support for Watchdog Timer (WDT)
 * Library functions supporting sleep mode and the Real Time Clock (RTC)
 
 Known Issues

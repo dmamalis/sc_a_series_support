@@ -1,8 +1,7 @@
+xCORE-Analog support library programming guide
+==============================================
 
-Analog tile API programming guide
-=================================
-
-This section provides information on how to program applications using the Analog Tile module.
+This section provides information on how to program applications using the xCORE-Analog support library.
 
 Source code structure
 ---------------------
@@ -20,8 +19,7 @@ Of course the application may use other modules which can also be directories at
 Key files
 +++++++++
 
-The following header file contains prototypes of all functions required to use the LIN Bus 
-module. The API is described in :ref:`sec_api`.
+The following header file contains prototypes of all functions required to use the xCORE-Analog support library. The API is described in :ref:`sec_api`.
 
 .. list-table:: Key Files
   :header-rows: 1
@@ -74,7 +72,7 @@ The minimal example below shows one ADC channel being configured and enabled (AD
 Using sleep mode
 ++++++++++++++++
 
-Sleep mode is a deep low power mode provided by the XS1-A series devices. In addition to low power modes within the xCORE such as Active Energy Conservation which allow figures of 10s of milliwatts, sleep mode allows a very low power state drawing hundreds of microwatts.
+Sleep mode is a deep low power mode provided by the xCORE-Analog devices. In addition to low power modes within the xCORE such as Active Energy Conservation which allow figures of 10s of milliwatts, sleep mode allows a very low power state drawing hundreds of microwatts.
 
 Sleep mode completely powers down the xCORE digital tile but keeps a few essential services going within the analog tile, such as RTC and sleep memory. 128 Bytes of deep sleep memory is provided that allows the application to store parameter before entering sleep mode. 
 
@@ -86,22 +84,22 @@ The below example shows a minimal code snippet for entering sleep mode and wakin
 
   void sleep_for_a_while(void)
   {
-    at_rtc_reset();                   //Clear RTC to 0
-    at_pm_set_wake_time(5000);	        //Wakeup in about 5 seconds
+    at_rtc_reset();                 //Clear RTC to 0
+    at_pm_set_wake_time(5000);	    //Wakeup in about 5 seconds
     at_pm_enable_wake_source(RTC);	//Wake on RTC
-    at_pm_sleep_now();	               //Go to sleep
+    at_pm_sleep_now();	            //Go to sleep
   }
 
 
-In addition to sleep function, the chip also supports an RTC. Because xCORE devices have multiple, 10ns accurate timers available to the application, the RTC is typically only used for controlling the wakeup function. All RTC parameters are scaled to milliseconds by the library to make them easy to use. When awake, the RTC is clocked by the main chip oscillator. When asleep, the accuracy of the RTC is typically lower (see data sheet for specification) because it is clocked by the internal silicon oscillator which is susceptible to PVT variation. Consequently, it should be used to set an approximate wake up time only.
+In addition to sleep function, the chip also supports an RTC. Because xCORE-Analog devices have multiple, 10ns accurate timers available to the application, the RTC is typically only used for controlling the wakeup function. All RTC parameters are scaled to milliseconds by the library to make them easy to use. When awake, the RTC is clocked by the main chip oscillator. When asleep, the accuracy of the RTC is typically lower (see data sheet for specification) because it is clocked by the internal silicon oscillator which is susceptible to PVT variation. Consequently, it should be used to set an approximate wake up time only.
 
-More detailed examples and use of sleep memory, as well as the RTC, can be found in the test and ``Example Applications`` section of this document and within the source tree.
+More detailed examples and use of sleep memory, as well as the RTC, can be found in the test and ``Example applications`` section of this document and within the source tree.
 
 	
 Using the Watchdog timer
 ++++++++++++++++++++++++
 
-The Watchdog Timer provides a hardware mechanism to reset the xCORE should a software crash/lockup occur. The main application loop periodically "kicks" (resets) the WDT under normal operation.  The timeout period should be set higher than the typical loop speed, preventing reset under normal operation. The WDT API uses milliseconds as the time base and can support up to about a minute for before timeout.
+The Watchdog Timer provides a hardware mechanism to reset the xCORE-Analog device should a software crash/lockup occur. The main application loop periodically "kicks" (resets) the WDT under normal operation.  The timeout period should be set higher than the typical loop speed, preventing reset under normal operation. The WDT API uses milliseconds as the time base and can support up to about a minute for before timeout.
 
 Note that there is no mechanism for determining that the reset was caused by the WDT. We suggest using the deep sleep memory to periodically store system state to help determine the likely cause of the reset.
 
@@ -109,12 +107,12 @@ The below example shows a minimal code snippet for configuring the WDT to reset 
 
   void my_safe_function(void)
   {
-    at_watchdog_set_timeout(500);   	//Set timeout period to 500ms
+    at_watchdog_set_timeout(500); //Set timeout period to 500ms
     at_watchdog_enable();
-    at_watchdog_kick();			//Reset the watchdog counter
+    at_watchdog_kick();			      //Reset the watchdog counter
     while (1){
-      foo();				//Functions that take less than 500ms
-      bar();				//when operating correctly.
+      foo();				              //Functions that take less than 500ms
+      bar();				              //when operating correctly.
       at_watchdog_kick();
     }
   }				

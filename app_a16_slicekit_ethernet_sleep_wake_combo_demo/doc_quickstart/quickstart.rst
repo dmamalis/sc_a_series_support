@@ -1,7 +1,7 @@
 xCORE-Analog sliceKIT Ethernet sleep wake combo demo quickstart guide
 =====================================================================
 
-This application uses the ``XP-SKC-A16`` xCORE-Analog sliceKIT core board plus  ``XA-SK-E100`` and ``XA-SK-MIXED SIGNAL`` sliceCARDs together with the xSOFTip ``module_analog_tile_support`` and ``module_xtcp`` to demonstrate how the chip can be made to sleep and wake up using different sources. The application also runs a TCP web client and informs a web server before going to sleep and after waking up from sleep.
+This application uses the xCORE-Analog sliceKIT core board (XP-SKC-A16) plus Ethernet (XA-SK-E100) and Mixed signal (XA-SK-MIXED SIGNAL) sliceCARDs together with the xSOFTip ``module_analog_tile_support`` and ``module_xtcp`` to demonstrate how the chip can be made to sleep and wake up using different sources. The application also runs a TCP web client and informs a web server before going to sleep and after waking up from sleep.
 
 Host computer / other setup
 ---------------------------
@@ -31,25 +31,25 @@ Hardware setup
 
 Required hardware:
 
-* XP-SKC-A16: xCORE-Analog sliceKIT core board
-* XA-SK-E100: Ethernet sliceCARD
-* XA-SK-MIXED SIGNAL: mixed signal sliceCARD
-* XTAG-2: XTAG2
-* XA-SK-XTAG2: adapter
+* xCORE-Analog sliceKIT core board (XP-SKC-A16)
+* Ethernet sliceCARD (XA-SK-E100)
+* Mixed signal sliceCARD (XA-SK-MIXED SIGNAL)
+* XTAG2 (XTAG-2)
+* XTAG2 Adapter (XA-SK-XTAG2)
 * Ethernet and USB cables
 * 12V DC power supply
 
 Setup:
 
+#. Ensure that the room (in which is demo is presented) is well lit as in this demo the LDR will be used to detect light.
 #. Connect the adapter to the core board.
 #. Set the ``XMOS LINK`` to ON on the adapter.
 #. Connect XTAG2 to ``XSYS`` side of the adapter.
 #. Connect the other end of XTAG2 to your computer using a USB cable.
-#. Ensure that the room (in which is demo is presented) is well lit as in this demo the LDR will be used to detect light.
 #. Connect the Ethernet sliceCARD to the xCORE-Analog sliceKIT core board using the connector marked with the ``SQUARE``.
 #. Connect the other end of Ethernet sliceCARD and host computer using Ethernet cable.
-#. Connect mixed signal sliceCARD to the xCORE-Analog sliceKIT core board using the connector marked with the ``A``.
-#. On the mixed signal sliceCARD:
+#. Connect Mixed signal sliceCARD to the xCORE-Analog sliceKIT core board using the connector marked with the ``A``.
+#. On the Mixed signal sliceCARD:
 
    - To use LDR as wake up source, attach jumpers on (or short):
 
@@ -69,7 +69,7 @@ Setup:
 
 .. figure:: images/ms_slicecard.*
 
-   mixed signal sliceCARD jumper settings
+   Mixed signal sliceCARD jumper settings
 
 Import and build the application
 --------------------------------
@@ -79,7 +79,8 @@ Importing the xCORE-Analog sliceKIT Ethernet sleep wake combo demo application:
 * Open the *Edit* perspective (Window -> Open Perspective -> XMOS Edit).
 * Open the *xSOFTip* view from (Window -> Show View -> xSOFTip). An *xSOFTip* window appears on the bottom-left.
 * Find the *xCORE-Analog sliceKIT Ethernet Sleep Wake Combo Demo*.
-* Click and drag it into the *Project Explorer* window. Doing this will open a *Import xTIMEcomposer Software* window. Click on *Finish* to download and complete the import.
+* Click and drag it into the *Project Explorer* window. Doing this will open a *Import xTIMEcomposer Software* window. 
+* Click on *Finish* to download and complete the import.
 * This will also automatically import dependencies for this application.
 * The application is called as *app_a16_slicekit_ethernet_sleep_wake_combo_demo* in the *Project Explorer* window.
 
@@ -102,8 +103,7 @@ Flash the Application:
 
 * In the *Project Explorer* window, locate the *app_a16_slicekit_ethernet_sleep_wake_combo_demo.xe* in the (app_a16_slicekit_ethernet_sleep_wake_combo_demo -> Binaries).
 * Right click on *app_a16_slicekit_ethernet_sleep_wake_combo_demo.xe* and click on (Flash As -> xCORE Application).
-* A *Select Device* window appears.
-* Select *XMOS XTAG-2 connected to L1* and click OK.
+* A *Select Device* window appears. Select *XMOS XTAG-2 connected to L1* and click OK. Note that, if the xTIMEcomposer Studio has already recognized the connected board then it will start flashing immediately and the *Select Device* window will not be presented.
 * Check the *Console* window to verify flashing progress.
 * After successful flashing, switch OFF the xCORE-Analog sliceKIT core board.
 
@@ -112,9 +112,11 @@ Demo:
 * On the *Terminal* or *Command Line* navigate to *app_a16_slicekit_ethernet_sleep_wake_combo_demo/xmos_python_webserver*.
 * Run the Python script with the web server address (*Note:* administrator privileges may be required to run ``server.py``.)
 
-     - For Windows: start command prompt as an administrator and then execute the Python scripts.
-
-     - For Mac / Linux: run the scripts with *sudo*.
+   - For Windows: start command prompt as an administrator and then execute the Python scripts. The scripts may be executed by invoking Python from its installation path. Usually, Python will be installed in *C:\\*. ::
+     
+      c:\Python33\python.exe server.py 169.254.202.189
+      
+   - For Mac / Linux: run the scripts with *sudo*.
 
 ::
 
@@ -161,7 +163,7 @@ Demo:
    XMOS: Button = 005; Temperature = 124; Joystick X = 111, Y = 113
    XMOS: Button = 005; Temperature = 124; Joystick X = 028, Y = 035
 
-* After 1 minute the following message is displayed::
+* After 1 minute the following message is displayed. Please note that the program will perform a forced sleep even while the sensor values are being changed (example: even when the button are being clicked)::
 
    XMOS: Going to sleep.
    -----------------------------------------
@@ -182,6 +184,8 @@ Demo:
 * The Python server will log the temperature values to ``temperature.log``. It will write out a value every 10 seconds and every time the temperature changes.
 
 *Note:* The button press count is stored in sleep memory. When the chip wakes up, the program will look in the sleep memory for valid data and continue counting button presses from the last value.
+
+* The web server program can be exited by pressing 'CTRL+C' on the keyboard.
 
 Next Steps
 ++++++++++
