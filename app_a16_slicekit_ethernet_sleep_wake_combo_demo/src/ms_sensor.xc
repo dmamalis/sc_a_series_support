@@ -12,7 +12,7 @@
 // sensor data
 static sensor_data_t sensor_data;
 // The temperature look-up table to convert ADC value from Thermistor to Celsius
-static int TEMPERATURE_LUT[TEMPERATURE_LUT_ENTRIES][2] = 
+static int TEMPERATURE_LUT[TEMPERATURE_LUT_ENTRIES][2] =
 {
   {-10,211},{-5,202},{0,192},{5,180},
   {10,167},{15,154},{20,140},{25,126},
@@ -23,15 +23,15 @@ static int TEMPERATURE_LUT[TEMPERATURE_LUT_ENTRIES][2] =
 
 
 /*---------------------------------------------------------------------------
- convert ADC value to temperature in Celsius 
+ convert ADC value to temperature in Celsius
  ---------------------------------------------------------------------------*/
 static int celsius_temperature(int adc_value)
 {
   int i = 0, x1, y1, x2, y2, celsius = 0;
-  
-  while((adc_value < TEMPERATURE_LUT[i][1]) && (i < TEMPERATURE_LUT_ENTRIES)) i++; 
-  
-  if (i != TEMPERATURE_LUT_ENTRIES) 
+
+  while((adc_value < TEMPERATURE_LUT[i][1]) && (i < TEMPERATURE_LUT_ENTRIES)) i++;
+
+  if (i != TEMPERATURE_LUT_ENTRIES)
   {
     x1 = TEMPERATURE_LUT[i-1][1];
     y1 = TEMPERATURE_LUT[i-1][0];
