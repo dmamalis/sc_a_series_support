@@ -1,9 +1,10 @@
 xCORE-Analog Support Library
 ............................
 
-:Latest release: 1.0.0beta0
+:Latest release: 1.0.0rc0
 :Maintainer: pthedinger
 :Description: xCORE-Analog support library.
+
 
 
 
