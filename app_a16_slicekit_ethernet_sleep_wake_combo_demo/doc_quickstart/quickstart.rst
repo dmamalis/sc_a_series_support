@@ -133,7 +133,7 @@ Demo:
    Server: Web server started with IP address = 169.254.202.189
    -----------------------------------------
 
-* Wait until the following message is displayed::
+* Wait until the following message is displayed (it should be after about 10 seconds)::
 
    XMOS: Program running! Sensor events will now be recorded.
 
@@ -186,6 +186,11 @@ Demo:
 *Note:* The button press count is stored in sleep memory. When the chip wakes up, the program will look in the sleep memory for valid data and continue counting button presses from the last value.
 
 * The web server program can be exited by pressing 'CTRL+C' on the keyboard.
+
+Troubleshooting
++++++++++++++++
+
+If the demo does not run as described then please check all the network settings match those specified. Also ensure that the order of running the server and powering ON the core board is followed as it is important that the server is ready before the client starts. Also, please ensure that you have waited at least 10 seconds for the device to start.
 
 Next Steps
 ++++++++++
