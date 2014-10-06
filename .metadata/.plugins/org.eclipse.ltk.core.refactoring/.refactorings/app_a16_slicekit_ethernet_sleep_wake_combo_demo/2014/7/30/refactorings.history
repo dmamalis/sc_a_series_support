@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;app_a16_slicekit_ethernet_sleep_wake_combo_demo/src/ethernet_board_conf.h&apos; to &apos;ethernet_board_conf.h.bak&apos;" description="Rename resource &apos;ethernet_board_conf.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/ethernet_board_conf.h" name="ethernet_board_conf.h.bak" stamp="1406329543824" updateReferences="true"/>
+</session>

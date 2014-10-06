@@ -1,0 +1,7 @@
+
+**** Build of configuration Default for project app_a16_slicekit_ethernet_sleep_wake_combo_demo ****
+
+xmake all 
+Using modules: module_analog_tile_support module_ethernet_board_support module_otp_board_info module_xtcp module_xassert module_logging module_ethernet module_ethernet_smi module_locks
+xmake[1]: `bin//app_a16_slicekit_ethernet_sleep_wake_combo_demo.xe' is up to date.
+Build Complete

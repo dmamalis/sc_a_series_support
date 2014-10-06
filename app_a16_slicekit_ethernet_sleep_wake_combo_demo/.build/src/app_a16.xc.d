@@ -1,0 +1,39 @@
+.build/src/app_a16.xc.d ./.build/src/app_a16.xc.o: ./src/app_a16.xc \
+  ../../sc_a_series_support/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src/webclient/webclient.h \
+  ../../module_xtcp/src/xtcp_client.h \
+  ../../module_xtcp/src/xtcp_conf_derived.h \
+  ../../module_xtcp/src/xtcp_bufinfo.h \
+  ../../module_xtcp/src/xtcp_blocking_client.h \
+  ../../module_ethernet_board_support/common/ethernet_board_support.h \
+  ../../module_ethernet_board_support/STARTKIT/ethernet_board_conf.h \
+  ../../module_ethernet/src/common/ethernet_conf_derived.h \
+  ../../sc_a_series_support/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src/ethernet_conf.h \
+  ../../module_xtcp/src/xtcp.h \
+  ../../module_xtcp/src/ethernet_xtcp_server.h \
+  ../../module_xtcp/src/xtcp_uip/uip_server.h \
+  ../../module_otp_board_info/src/otp_board_info.h \
+  ../../module_ethernet/src/include/ethernet.h \
+  ../../module_ethernet/src/include/mii.h \
+  ../../module_ethernet_smi/src/smi.h \
+  ../../module_ethernet/src/include/ethernet_server.h \
+  ../../module_ethernet/src/full/mii_full.h \
+  ../../module_ethernet/src/full/mii_queue.h \
+  ../../module_ethernet/src/include/ethernet_server_full.h \
+  ../../module_ethernet/src/include/ethernet_server_lite.h \
+  ../../module_ethernet/src/include/ethernet_rx_client.h \
+  ../../module_ethernet/src/include/ethernet_rx_client_lite.h \
+  ../../module_ethernet/src/include/ethernet_rx_client_full.h \
+  ../../module_ethernet/src/include/ethernet_tx_client.h \
+  ../../module_ethernet/src/include/ethernet_tx_client_lite.h \
+  ../../module_ethernet/src/include/ethernet_tx_client_full.h \
+  ../../module_ethernet/src/common/ethernet_phy_reset.h \
+  ../../module_xtcp/src/standalone_xtcp_server.h \
+  ../../sc_a_series_support/module_analog_tile_support/src/analog_tile_support.h \
+  ../../sc_a_series_support/module_analog_tile_support/src/at_adc.h \
+  ../../sc_a_series_support/module_analog_tile_support/src/at_wdt.h \
+  ../../sc_a_series_support/module_analog_tile_support/src/at_sleep.h \
+  ../../sc_a_series_support/app_a16_slicekit_ethernet_sleep_wake_combo_demo/src/ms_sensor.h \
+  ../../module_xtcp/src/xtcp_uip/timer.h \
+  ../../module_xtcp/src/xtcp_uip/clock.h \
+  ../../module_xtcp/src/xtcp_uip/clock-arch.h
+

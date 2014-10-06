@@ -1,0 +1,6 @@
+
+**** Build of configuration Debug for project app_adc_pwm_demo_a ****
+
+xmake CONFIG=Debug all 
+/home/dmamalis/Apps/XMOS/xTIMEcomposer/Community_13.1.0/build/xcommon/module_xcommon/build/../build/Makefile.common1:491: *** Cannot find module `module_pwm_tutorial_example'.  Stop.
+xmake: *** [bin/Debug/app_adc_pwm_demo_a_Debug.xe] Error 2

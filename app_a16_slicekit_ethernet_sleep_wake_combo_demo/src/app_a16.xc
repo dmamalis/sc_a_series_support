@@ -1,5 +1,5 @@
 #include "webclient.h"
-#include "ethernet_board_conf.h"
+#include "ethernet_board_support.h"
 #include "xtcp.h"
 #include "analog_tile_support.h"
 #include "ms_sensor.h"
@@ -24,15 +24,16 @@ on ETHERNET_DEFAULT_TILE: ethernet_xtcp_ports_t xtcp_ports = {
 };
 
 xtcp_ipconfig_t client_ipconfig = {
-  {169, 254, 202, 190},
-  {255, 255, 0, 0},
-  {0, 0, 0, 0}
+//  {169, 254, 202, 190},
+//  {255, 255, 0, 0},
+//  {0, 0, 0, 0}
+        {0, 0, 0, 0},{0, 0, 0, 0},{0, 0, 0, 0}
 };
 
 server_config_t server_config = {
-  {169, 254, 202, 189},
-  80,
-  80
+  {192, 168, 0, 4},
+  3000,
+  3000
 };
 
 client_data_t client_data = { 0 };
@@ -140,9 +141,9 @@ int main(void)
   par
   {
     on ETHERNET_DEFAULT_TILE: ethernet_xtcp_server(xtcp_ports, client_ipconfig, c_xtcp, 1);
-    on tile[1]: ethernet_sleep_wake_handler(c_sensor, c_xtcp[0]);
+    on tile[0]: ethernet_sleep_wake_handler(c_sensor, c_xtcp[0]);
     on tile[0]: mixed_signal_slice_sensor_handler(c_sensor, c_adc, trigger_port, p_sw1);
-    xs1_a_adc_service(c_adc);
+    startkit_adc(c_adc);
   } // par
   return 0;
 }

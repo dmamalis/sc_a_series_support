@@ -1,0 +1,5 @@
+
+**** Build of configuration Default for project module_analog_tile_support ****
+
+xmake -f .makefile all 
+** Module only - only builds as part of application **

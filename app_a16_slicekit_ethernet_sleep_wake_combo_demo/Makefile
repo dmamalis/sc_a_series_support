@@ -1,7 +1,7 @@
 # The TARGET variable determines what target system the application is
 # compiled for. It either refers to an XN file in the source directories
 # or a valid argument for the --target option when compiling
-TARGET = SLICEKIT-A16
+TARGET = STARTKIT
 
 # The APP_NAME variable determines the name of the final .xe file. It should
 # not include the .xe postfix. If left blank the name will default to
@@ -9,7 +9,7 @@ TARGET = SLICEKIT-A16
 APP_NAME = 
 
 # The USED_MODULES variable lists other module used by the application.
-USED_MODULES = module_analog_tile_support module_otp_board_info module_xtcp
+USED_MODULES = module_analog_tile_support module_ethernet_board_support module_otp_board_info module_xtcp
 
 # The flags passed to xcc when building the application
 # You can also set the following to override flags for a particular language:
